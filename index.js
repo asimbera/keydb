@@ -7,6 +7,4 @@ const app = express();
 app.use(bodyParser.text({ type: '*/*' }));
 app.use('/api', router);
 
-app.listen(3000, () => {
-  console.log('Server Running');
-});
+module.exports = app;
