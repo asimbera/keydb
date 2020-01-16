@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const app = require('../index');
+const app = require('../server');
 
 const [, , ...args] = process.argv;
 let port;
