@@ -7,7 +7,7 @@ Router.post('/:key', async (req, res) => {
   const key = req.params.key;
   const body = req.body.trim();
   if (!key || !token) {
-    res.status(400).json({
+    res.json({
       error: true,
       message: 'Token and Key cant be empty.'
     });
@@ -17,7 +17,7 @@ Router.post('/:key', async (req, res) => {
       if (!find_resp) {
         const db_resp = await dbAgent.add(key, body, token);
         const { key: res_key, value: res_val } = db_resp;
-        res.status(200).json({
+        res.json({
           error: false,
           message: {
             key: res_key,
@@ -27,7 +27,7 @@ Router.post('/:key', async (req, res) => {
       } else {
         const db_resp = await dbAgent.update(find_resp._id, body);
         const { key: res_key, value: res_val } = db_resp;
-        res.status(200).json({
+        res.json({
           error: false,
           message: {
             key: res_key,
@@ -37,7 +37,7 @@ Router.post('/:key', async (req, res) => {
       }
     } catch (e) {
       console.log(e.message);
-      res.status(500).json({
+      res.json({
         error: true,
         message: e._message
       });
@@ -50,7 +50,7 @@ Router.get('/:key', async (req, res) => {
   const token = req.query.token;
   const key = req.params.key;
   if (!key || !token) {
-    res.status(400).json({
+    res.json({
       error: true,
       message: 'Token and Key cant be empty.'
     });
@@ -59,7 +59,7 @@ Router.get('/:key', async (req, res) => {
       const db_resp = await dbAgent.get(key, token);
       if (!db_resp) throw new Error('Non Existant Key');
       const { key: res_key, value: res_val } = db_resp;
-      res.status(200).json({
+      res.json({
         error: false,
         message: {
           key: res_key,
@@ -67,7 +67,7 @@ Router.get('/:key', async (req, res) => {
         }
       });
     } catch (e) {
-      res.status(501).json({
+      res.json({
         error: true,
         message: e.message
       });
@@ -80,20 +80,20 @@ Router.delete('/:key', async (req, res) => {
   const token = req.query.token;
   const key = req.params.key;
   if (!key || !token) {
-    res.status(400).json({
+    res.json({
       error: true,
       message: 'Token and Key cant be empty.'
     });
   } else {
     try {
       await dbAgent.del(key, token);
-      res.status(200).json({
+      res.json({
         error: false,
         message: null
       });
     } catch (e) {
       console.log(e.message);
-      res.status(501).json({
+      res.json({
         error: true,
         message: null
       });
@@ -104,7 +104,7 @@ Router.delete('/:key', async (req, res) => {
 Router.get('/', async (req, res) => {
   const token = req.query.token;
   if (!token) {
-    res.status(400).json({
+    res.json({
       error: true,
       message: 'Token cant be empty.'
     });
@@ -115,13 +115,13 @@ Router.get('/', async (req, res) => {
       db_resp.length > 0
         ? (val_res = db_resp.map(val => ({ key: val.key, value: val.value })))
         : (val_res = []);
-      res.status(200).json({
+      res.json({
         error: false,
         message: val_res
       });
     } catch (e) {
       console.log(e.message);
-      res.status(501).json({
+      res.json({
         error: true,
         message: null
       });

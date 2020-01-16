@@ -5,7 +5,7 @@ module.exports = async (req, res, next) => {
   if (exist) {
     next();
   } else {
-    res.status(400).json({
+    res.json({
       error: true,
       message: 'Auth Failuare'
     });
