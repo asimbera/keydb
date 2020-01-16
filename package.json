@@ -1,0 +1,29 @@
+{
+  "name": "@asimbera/keydb",
+  "version": "1.0.0",
+  "description": "Key-Value Database as a Service",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/asimbera/keydb.git"
+  },
+  "keywords": [
+    "kv",
+    "database",
+    "dbaas"
+  ],
+  "author": "Asim Bera <asimbera@outlook.in>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/asimbera/keydb/issues"
+  },
+  "homepage": "https://github.com/asimbera/keydb#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.8.7"
+  }
+}
