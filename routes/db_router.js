@@ -1,5 +1,5 @@
 const Router = require('express').Router();
-const dbAgent = require('./db_agent');
+const dbAgent = require('../utils/db_agent');
 
 // add route
 Router.post('/:key', async (req, res) => {

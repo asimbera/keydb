@@ -1,18 +1,6 @@
-const mongoose = require('mongoose');
+const { Schema, model } = require('mongoose');
 
-mongoose.connect(process.env.DB_URL, {
-  useCreateIndex: true,
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useFindAndModify: false
-});
-
-const db = mongoose.connection;
-
-db.once('error', console.error.bind(console, 'connection error:'));
-db.on('open', () => console.log('Connected To Database'));
-
-const kvSchema = new mongoose.Schema({
+const kvSchema = new Schema({
   key: {
     type: String,
     required: true
@@ -28,7 +16,7 @@ const kvSchema = new mongoose.Schema({
   }
 });
 
-const KVModel = mongoose.model('kv', kvSchema);
+const KVModel = model('kv', kvSchema);
 
 const add = (key, value, token) => {
   return new KVModel({ key, value, token }).save();
